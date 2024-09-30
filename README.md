@@ -1,70 +1,227 @@
-# Getting Started with Create React App
+# WhatsApp Chatbot Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository contains the **frontend** part of a full-stack WhatsApp chatbot application. The frontend is built with **React** and styled using **Tailwind CSS**. It communicates with the backend API to fetch and display chat messages stored in a MongoDB database.
 
-## Available Scripts
+## Table of Contents
+
+- [About the Project](#about-the-project)
+  - [Features](#features)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Available Scripts](#available-scripts)
+- [Project Structure](#project-structure)
+- [Environment Variables](#environment-variables)
+- [Styling with Tailwind CSS](#styling-with-tailwind-css)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## About the Project
+
+The **WhatsApp Chatbot Frontend** is a React application that displays chat conversations between users and a WhatsApp chatbot. It fetches data from the backend API and presents it in a clean, organized interface. This project is part of a larger system that includes a backend server handling message processing and storage.
+
+### Features
+
+- **Chat Display**: View chat messages retrieved from the backend API.
+- **Responsive Design**: Optimized for various screen sizes using Tailwind CSS.
+- **Interactive UI**: Clean and intuitive user interface for easy navigation.
+- **Real-Time Updates**: Automatically updates the chat list when new messages are fetched.
+
+### Built With
+
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Axios](https://github.com/axios/axios)
+
+---
+
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+Ensure you have the following installed on your system:
+
+- **Node.js** (v12 or later)
+- **npm** (v6 or later)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/your-username/whatsapp-chatbot-frontend.git
+   cd whatsapp-chatbot-frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in the root directory and add the following:
+
+   ```env
+   REACT_APP_BACKEND_API_URL=http://localhost:5000/api
+   ```
+
+   Replace `http://localhost:5000/api` with the URL of your backend API if it's different.
+
+4. **Start the development server**
+
+   ```bash
+   npm start
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) to view the app in your browser.
+
+---
+
+## Usage
+
+The frontend application fetches chat messages from the backend API and displays them. Ensure that the backend server is running and accessible at the URL specified in your `.env` file.
+
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- **`npm start`**: Runs the app in development mode.
+- **`npm run build`**: Builds the app for production.
+- **`npm test`**: Launches the test runner.
+- **`npm run eject`**: Ejects the app configuration (not reversible).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
 
-### `npm test`
+```plaintext
+whatsapp-chatbot-frontend/
+├── public/                     # Public assets
+│   ├── index.html              # HTML template
+│   └── favicon.ico             # Favicon
+├── src/
+│   ├── components/
+│   │   ├── ChatDisplay.js      # Component displaying all chats
+│   │   └── ChatItem.js         # Component for individual chat messages
+│   ├── App.js                  # Main app component
+│   ├── index.js                # Entry point of the app
+│   └── index.css               # Global styles (includes Tailwind imports)
+├── .env                        # Environment variables
+├── package.json                # Dependencies and scripts
+├── tailwind.config.js          # Tailwind CSS configuration
+├── postcss.config.js           # PostCSS configuration for Tailwind CSS
+└── README.md                   # Project documentation
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Environment Variables
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app uses an environment variable to determine the backend API URL.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **`REACT_APP_BACKEND_API_URL`**: The base URL of the backend API.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create a `.env` file in the root directory:
 
-### `npm run eject`
+```env
+REACT_APP_BACKEND_API_URL=http://localhost:5000/api
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Styling with Tailwind CSS
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Tailwind CSS is used for styling the application. It allows for rapid UI development with utility-first CSS classes.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Setup
 
-## Learn More
+Tailwind CSS is configured in `tailwind.config.js`:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+module.exports = {
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  darkMode: false, // 'media' or 'class' for dark mode support
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+PostCSS is set up in `postcss.config.js` to process Tailwind directives:
 
-### Code Splitting
+```javascript
+module.exports = {
+  plugins: [require('tailwindcss'), require('autoprefixer')],
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Global Styles
 
-### Analyzing the Bundle Size
+In `src/index.css`, import Tailwind's base, components, and utilities:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-### Making a Progressive Web App
+/* Custom global styles can be added here */
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Contributions are welcome! Please follow these steps:
 
-### Deployment
+1. **Fork the repository**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. **Create your feature branch**
 
-### `npm run build` fails to minify
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. **Commit your changes**
+
+   ```bash
+   git commit -m 'Add YourFeature'
+   ```
+
+4. **Push to the branch**
+
+   ```bash
+   git push origin feature/YourFeature
+   ```
+
+5. **Open a pull request**
+
+---
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## Contact
+
+**Your Name**
+
+- Email: [nullvoid76@example.com](mailto:nullvoid76@example.com)
+- GitHub: [@nullvoid76](https://github.com/NULLVOID76)
+
+*Feel free to reach out if you have any questions or suggestions!*
+---
